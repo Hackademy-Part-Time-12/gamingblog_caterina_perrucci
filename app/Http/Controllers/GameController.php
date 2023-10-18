@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Game;
 use Illuminate\Http\Request;
+use App\Http\Requests\GameRequest;
 
 class GameController extends Controller
 {
@@ -11,7 +12,7 @@ class GameController extends Controller
         return view('game.create');
     }
 
-    public function store(Request $request){
+    public function store(GameRequest $request){
         /* $game = new Game();
         $game->title = $request->title;
         $game->producer = $request->producer;
