@@ -20,13 +20,19 @@ class GameController extends Controller
         $game->truffa = "ti ho fregato";
         $game->save(); */
 
+        if(!$request->file('cover')){
+            $img = 'default/default-image.jpg';
+        } else {
+            $img = $request->file('cover')->store('public/covers');
+        }
         // Protected Mass Assignment
         Game::create([
             'title' => $request->title,
             'producer' => $request->producer,
             'description' => $request->description,
             'price' => $request->price,
-            'truffa' => "ti ho fregato"
+            //! evaluation -> valutazione
+            'cover' => $img,
         ]);
 
         return redirect(route('homepage'))->with('gameCreated', 'Hai inserito correttamente un videogame');

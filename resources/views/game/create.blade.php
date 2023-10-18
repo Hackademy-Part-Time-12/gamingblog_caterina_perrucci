@@ -7,7 +7,7 @@
     <div class="container my-5">
         <div class="row">
             <div class="col-12 col-md-8">
-                <form class="p-5 shadow" action="{{route('game.store')}}" method="POST">
+                <form class="p-5 shadow" action="{{route('game.store')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
                         <label for="title" class="form-label">Titolo del videogame</label>
@@ -20,6 +20,10 @@
                     <div class="mb-3">
                         <label for="price" class="form-label">Prezzo del videogame</label>
                         <input type="number" class="form-control" id="price" name="price">
+                    </div>
+                    <div class="mb-3">
+                        <label for="cover" class="form-label">Copertina del videogame</label>
+                        <input type="file" class="form-control" id="cover" name="cover">
                     </div>
                     <div class="mb-3">
                         <label for="description" class="form-label">Descrizione del videogame</label>
