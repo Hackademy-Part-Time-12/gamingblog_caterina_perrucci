@@ -8,6 +8,13 @@ use App\Http\Requests\GameRequest;
 
 class GameController extends Controller
 {
+    public function __construct()
+    {
+        //$this->middleware('auth'); //! protegge tutti i metodi
+        //$this->middleware('auth')->only('create'); //! protegge solo un metodo
+        $this->middleware('auth')->except('index', 'show'); //! protegget tutti i mtodi tranne la index
+    }
+
     public function create(){
         return view('game.create');
     }
