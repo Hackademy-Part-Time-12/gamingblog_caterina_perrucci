@@ -11,11 +11,17 @@
         </li>
         @auth
         <li class="nav-item">
-          <a class="nav-link" href="{{route('game.create')}}">Inserisci un videogame</a>
+          <a class="nav-link" href="{{route('game.create')}}">Inserisci videogame</a>
         </li>
         @endauth
         <li class="nav-item">
-          <a class="nav-link" href="{{route('game.index')}}">Tutti i videogames</a>
+          <a class="nav-link" href="{{route('game.index')}}">Videogames</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{route('console.create')}}">Inserisci console</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{route('console.index')}}">Console</a>
         </li>
         @auth
         <li class="nav-item dropdown">
