@@ -14,6 +14,9 @@
             <div class="col-12">
                 <p>Brand: {{$console->brand}}</p>
                 <p>{{$console->description}}</p>
+                 {{-- coaleshing operator 
+                 traversamento del modello --}}
+                <p>Inserito da: {{$console->user->name ?? 'Utente sconosciuto'}}</p>
             </div>
         </div>
         <div class="row">

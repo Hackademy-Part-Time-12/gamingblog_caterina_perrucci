@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Game;
 use Illuminate\Http\Request;
 use App\Http\Requests\GameRequest;
+use Illuminate\Support\Facades\Auth;
 
 class GameController extends Controller
 {
@@ -41,6 +42,7 @@ class GameController extends Controller
             'price' => $request->price,
             //! evaluation -> valutazione
             'cover' => $img,
+            'user_id' => Auth::user()->id,
         ]);
 
         return redirect(route('homepage'))->with('gameCreated', 'Hai inserito correttamente un videogame');

@@ -42,4 +42,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    //! un utente può creare più oggetti di classe Console e quindi il nome del metodo è il nome del modello a cui fa riferimento al plurale (quindi consoles)
+    public function consoles(){
+        //! questo utente ha tante console
+        return $this->hasMany(Console::class);
+    }
+
+    public function games(){
+        return $this->hasMany(Game::class);
+    }
 }

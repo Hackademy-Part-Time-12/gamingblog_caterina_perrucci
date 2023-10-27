@@ -13,12 +13,14 @@
     <div class="row g-0">
         <div class="col-12 d-flex">
             <a href="{{route('console.show', $console)}}" class="btn text-primary">Scopri di più</a>
-            <a href="{{route('console.edit', $console)}}" class="btn text-warning">Modifica</a>
-            <form action="{{route('console.destroy', $console)}}" method="POST">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn btn-link text-danger text-decoration-none">Elimina</button>
-            </form>
+            @if (Auth::user() && $console->user_id == Auth::user()->id)
+                <a href="{{route('console.edit', $console)}}" class="btn text-warning">Modifica</a>
+                <form action="{{route('console.destroy', $console)}}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-link text-danger text-decoration-none">Elimina</button>
+                </form>
+            @endif
         </div>
     </div>
 </div>

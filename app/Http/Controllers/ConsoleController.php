@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Console;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ConsoleController extends Controller
 {
@@ -34,6 +35,7 @@ class ConsoleController extends Controller
             'brand' => $request->brand,
             'description' => $request->description,
             'logo' => $request->file('logo')->store('public/logos'),
+            'user_id' => Auth::user()->id,
         ]);
         return redirect()->route('console.index')->with('consoleCreated', 'Hai inserito una nuova console');
     }
