@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Console;
+use App\Models\Game;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,7 +23,8 @@ class ConsoleController extends Controller
      */
     public function create()
     {
-        return view('console.create');
+        $games = Game::all();
+        return view('console.create', compact('games'));
     }
 
     /**
@@ -30,13 +32,16 @@ class ConsoleController extends Controller
      */
     public function store(Request $request)
     {
-        Console::create([
+        $console = Console::create([
             'name' => $request->name,
             'brand' => $request->brand,
             'description' => $request->description,
             'logo' => $request->file('logo')->store('public/logos'),
             'user_id' => Auth::user()->id,
         ]);
+
+        $console->games()->attach($request->games);
+
         return redirect()->route('console.index')->with('consoleCreated', 'Hai inserito una nuova console');
     }
 
@@ -53,7 +58,8 @@ class ConsoleController extends Controller
      */
     public function edit(Console $console)
     {
-        return view('console.edit', compact('console'));
+        $games = Game::all();
+        return view('console.edit', compact('console', 'games'));
     }
 
     /**
@@ -82,6 +88,10 @@ class ConsoleController extends Controller
             'description' => $request->description,
             'logo' => $request->file('logo') ? $request->file('logo')->store('public/logos') : $console->logo,
         ]);
+
+        $console->games()->detach();
+        $console->games()->attach($request->games);
+
         return redirect()->route('console.index')->with('consoleUpdated', "Hai correttamente aggiornato la console $console->name");
     }
 
@@ -90,6 +100,7 @@ class ConsoleController extends Controller
      */
     public function destroy(Console $console)
     {
+        $console->games()->detach();
         $console->delete();
         return redirect()->route('console.index')->with('consoleDeleted', "Hai cancellato la console $console->name");
     }

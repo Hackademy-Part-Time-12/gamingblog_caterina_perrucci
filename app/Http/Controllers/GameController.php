@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Game;
 use Illuminate\Http\Request;
 use App\Http\Requests\GameRequest;
+use App\Models\Console;
 use Illuminate\Support\Facades\Auth;
 
 class GameController extends Controller
@@ -17,7 +18,8 @@ class GameController extends Controller
     }
 
     public function create(){
-        return view('game.create');
+        $consoles = Console::all();
+        return view('game.create', compact('consoles'));
     }
 
     public function store(GameRequest $request){
@@ -35,7 +37,7 @@ class GameController extends Controller
             $img = $request->file('cover')->store('public/covers');
         }
         // Protected Mass Assignment
-        Game::create([
+        $game = Game::create([
             'title' => $request->title,
             'producer' => $request->producer,
             'description' => $request->description,
@@ -44,6 +46,7 @@ class GameController extends Controller
             'cover' => $img,
             'user_id' => Auth::user()->id,
         ]);
+        $game->consoles()->attach($request->consoles);
 
         return redirect(route('homepage'))->with('gameCreated', 'Hai inserito correttamente un videogame');
     }

@@ -35,6 +35,15 @@
                         @enderror
                     </div>
                     <div class="mb-3">
+                        <label class="form-label">Console disponibili</label><br>
+                        @foreach ($consoles as $console)
+                            <input class="form-check-input" type="checkbox" value="{{$console->id}}" id="{{$console->id}}" name="consoles[]">
+                            <label class="form-check-label" for="{{$console->id}}">
+                                {{ $console->name }}
+                            </label><br>
+                        @endforeach
+                    </div>
+                    <div class="mb-3">
                         <label for="price" class="form-label">Prezzo del videogame</label>
                         <input type="number" class="form-control @error('price') is-invalid @enderror" id="price" name="price" value="{{ old('price') }}">
                         @error('price')

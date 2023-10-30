@@ -18,6 +18,15 @@
                         <input type="text" class="form-control" id="brand" name="brand">  
                     </div>
                     <div class="mb-3">
+                        <label class="form-label">Giochi disponibili</label><br>
+                        @foreach ($games as $game)
+                            <input class="form-check-input" type="checkbox" value="{{$game->id}}" id="{{$game->id}}" name="games[]">
+                            <label class="form-check-label" for="{{$game->id}}">
+                                {{ $game->title }}
+                            </label><br>
+                        @endforeach
+                    </div>
+                    <div class="mb-3">
                         <label for="logo" class="form-label">Logo console</label>
                         <input type="file" class="form-control" id="logo" name="logo">  
                     </div>

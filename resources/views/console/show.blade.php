@@ -14,6 +14,14 @@
             <div class="col-12">
                 <p>Brand: {{$console->brand}}</p>
                 <p>{{$console->description}}</p>
+                @if (count($console->games))
+                    <h4>Giochi disponibili:</h4>    
+                    <ul>
+                        @foreach ($console->games as $game)
+                            <li>{{$game->title}}, prodotto da {{$game->producer}}</li>
+                        @endforeach
+                    </ul>
+                @endif
                  {{-- coaleshing operator 
                  traversamento del modello --}}
                 <p>Inserito da: {{$console->user->name ?? 'Utente sconosciuto'}}</p>

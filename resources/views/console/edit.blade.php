@@ -19,6 +19,15 @@
                         <input type="text" class="form-control" id="brand" name="brand" value="{{$console->brand}}">  
                     </div>
                     <div class="mb-3">
+                        <label class="form-label">Giochi disponibili</label><br>
+                        @foreach ($games as $game)
+                            <input class="form-check-input" type="checkbox" value="{{$game->id}}" id="{{$game->id}}" name="games[]" @if($console->games->contains($game->id)) checked @endif>
+                            <label class="form-check-label" for="{{$game->id}}">
+                                {{ $game->title }}
+                            </label><br>
+                        @endforeach
+                    </div>
+                    <div class="mb-3">
                         <label for="actualLogo" class="form-label">Logo console attuale</label>
                         <img src="{{Storage::url($console->logo)}}" alt="" class="img-fluid">  
                     </div>

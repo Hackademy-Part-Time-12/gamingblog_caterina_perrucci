@@ -17,4 +17,9 @@ class Console extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
+
+    //! una console appartiene a più giochi, per questo il metodo sarà al plurale (quindi games)
+    public function games(){
+        return $this->belongsToMany(Game::class);
+    }
 }
